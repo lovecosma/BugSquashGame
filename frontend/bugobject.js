@@ -47,14 +47,14 @@ this.moving = function () {
     if(int(direction) == 1){
   this.y -= speed;
   if(this.y < 0){
-    this.x = random(0, 640);
-    this.y = 400;
+    this.x = random(0, windowWidth);
+    this.y = windowHeight;
   }
   }
   if(int(direction) == 0){
 this.y += speed;
-if(this.y > 400){
-  this.x = random(0, 640);
+if(this.y > windowHeight){
+  this.x = random(0, windowWidth);
   this.y = 0;
 }
 }
@@ -70,7 +70,7 @@ this.clicked = function () {
     imageMode(CENTER);
     if(level == 1){
     var distance = dist(mouseX, mouseY, this.x, this.y);
-    if(distance < 20){
+    if(distance < 30){
     this.dead = 1;
     if(this.dead == 1){
     score += 5;

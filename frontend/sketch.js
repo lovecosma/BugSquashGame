@@ -29,7 +29,7 @@ function preload(){
 
 
 function setup() {
-  createCanvas(640, 400);
+  createCanvas(windowWidth, windowHeight);
   textFont(antFarm);
     for(i = 0; i < 5; i ++){
     insect[i] = spritesheet.get(sheetX, 0, 96, 96);
@@ -37,26 +37,20 @@ function setup() {
     frameRate(20);
   }
   for(j = 0; j < totalbugs; j ++){
-  bug[j] = new Ant(random(50, 640), random(50, 400), insect, random(0, 2), speed);
+  bug[j] = new Ant(random(50, windowWidth-50), random(50, windowHeight-50), insect, random(0, 2), speed);
 }
 }
 function mouseClicked(){
-  speed += 0.2;
+  speed += 0.6;
   for(q = 0; q < totalbugs; q ++){
   bug[q].clicked();
   }
-  var g = dist(mouseX, mouseY, 320, 300);
+  var g = dist(mouseX, mouseY, 0.5*windowWidth, 0.6*windowHeight);
   if(g < 25){
     s = second();
     level = 1;
   }
-  if(level == 2){
-    textAlign(CENTER);
-    var d = dist(mouseX, mouseY, 340, 250);
-    if(d < 50){
-      level = 1;
-    }
-  }
+
   }
 
 function draw(){;
@@ -65,17 +59,17 @@ function draw(){;
   fill(0);
   textSize(72);
   textAlign(CENTER);
-  text("BUG SQUASH", 320, 125);
+  text("BUG SQUASH", 0.5*windowWidth, 0.4*windowHeight);
   textSize(28);
-  text("Ready to Squash some Bugs?", 320, 200);
+  text("Ready to Squash some Bugs?", 0.5*windowWidth, 0.5*windowHeight);
   textSize(28);
-  var d = dist(mouseX, mouseY, 320, 300);
+  var d = dist(mouseX, mouseY, 0.5*windowWidth, 0.6*windowHeight);
   if(d < 25){
     fill(255);
   } else {
     fill(0);
   }
-    text("Yes! Let's Go!", 320, 300);
+    text("Yes! Let's Go!", 0.5*windowWidth, 0.6*windowHeight);
   }
   if(level == 1){
     background(68, 46, 33);
@@ -89,16 +83,16 @@ function draw(){;
     time = (s - second());
     timer = 30 - abs(time);
     text("Time Left: \n" + abs(timer) + " seconds", 70, 25);
-    text("Score: \n" + score + " points", 570, 25);
+    text("Score: \n" + score + " points", windowWidth*0.95, 25);
     if(abs(timer) == 0){
       level = 2;
     }
   }
   if(level == 2){
   textSize(64);
-  text("Game Over", 320, 125);
+  text("Game Over", windowWidth*0.5, windowHeight*0.4);
   textSize(28);
-    text("Final Score: \n" + score + " points", 330, 300);
+    text("Final Score: \n" + score + " points", windowWidth*0.5, windowHeight*0.5);
   }
   if(deadCount >= totalbugs){
     level == 2;
